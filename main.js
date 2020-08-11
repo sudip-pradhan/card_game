@@ -11,7 +11,7 @@ function shuffle(array) {
 
 function init() {
   let x = document.querySelectorAll("img");
-  for (let i = 5; i < x.length; i++)
+  for (let i = 6; i < x.length; i++)
     x[i].style.display = "none";
 }
 
@@ -39,12 +39,11 @@ function deckDisplay() {
     }
     deckCursor = 0;
     spliceelement.sort();
-    for(let i=0;i<spliceelement.length;i++)
-    {
-      deck.splice(spliceelement[i]-i, 1);
-      hash[spliceelement[i]]=0;
+    for (let i = 0; i < spliceelement.length; i++) {
+      deck.splice(spliceelement[i] - i, 1);
+      hash[spliceelement[i]] = 0;
     }
-    spliceelement=[];
+    spliceelement = [];
 
     return;
   }
@@ -69,12 +68,12 @@ function deckDisplay() {
     x[32].classList.remove("active");
     x[33].classList.add("active");
     deckCursor += 1;
-    botdeckindex=deckCursor-1;
+    botdeckindex = deckCursor - 1;
     return;
   }
 
   deckCursor += 3;
-  botdeckindex=deckCursor-1;
+  botdeckindex = deckCursor - 1;
 }
 
 function unsortedDisplay() {
@@ -157,7 +156,7 @@ let deck = [];
 for (let i = 0; i < 52; i++)
   deck.push(i);
 console.log(deck);
-//shuffle(deck);
+shuffle(deck);
 let stack = [];
 for (let i = 0; i < 13; i++)
   stack.push(deck.pop());
@@ -167,6 +166,7 @@ for (let i = 0; i < 13; i++)
 let sorted = [[], [], [], []];
 let sorted_bottom = deck.pop();
 sorted[0].push(sorted_bottom);
+document.getElementById("hovershow").querySelectorAll("img")[0].src="./img/" + sorted_bottom + ".png";
 
 //push_sorted(sorted_bottom);
 
@@ -184,12 +184,11 @@ unsortedDisplay();
 displayTop();
 
 var entry = 1, exit = 0;
-var state = 0,pushElemet;
-var botdeckindex=-1;
-var spliceelement=[];
-var hash=[];
-for(let i=0;i<34;i++)
-{
+var state = 0, pushElemet;
+var botdeckindex = -1;
+var spliceelement = [];
+var hash = [];
+for (let i = 0; i < 34; i++) {
   hash.push(0);
 }
 
@@ -198,7 +197,7 @@ button1.style.display = "block";
 button1.addEventListener('click', deckDisplay);
 
 let hiddenBank = document.getElementById("hiddenBank");
-hiddenBank.addEventListener('click', () => console.log("hidden"));//1
+hiddenBank.addEventListener('click', hclk);//1
 
 let sortedBank = document.getElementById("sortedBank").querySelectorAll("img");
 //console.log(sortedBank);
@@ -220,6 +219,21 @@ fourth.addEventListener('click', () => mclk(3));//9
 let bottShelf = document.getElementsByClassName("bottShelf");
 bottShelf[0].addEventListener('click', bclk);//10
 
+function hclk() {
+  if (entry) {
+    if(stack.length==0)
+    return;
+    pushElemet = stack.pop();
+    displayTop();
+    entry = 0;
+    exit = 1;
+  }
+
+  else if (exit) {
+    return;
+  }
+}
+
 function sclk(state) {
   if (entry) {
     return;
@@ -237,7 +251,9 @@ function sclk(state) {
 function mclk(state) {
   if (entry) {
     //console.log("mid entry " + state);
-    pushElemet=unsorted[state].pop();
+    if (unsorted[state].length == 0)
+      return;
+    pushElemet = unsorted[state].pop();
     unsortedDisplay();
     entry = 0;
     exit = 1;
@@ -255,21 +271,22 @@ function mclk(state) {
 function bclk() {
   if (entry) {
     //console.log("bot entry");
-    if(hash[botdeckindex]==0)
-    {
-    pushElemet = deck[botdeckindex];
-    spliceelement.push(botdeckindex);
-    hash[botdeckindex]=1;
-    //console.log(spliceelement);
-    let y = document.getElementById("bottShelf").querySelectorAll("img");
-    y[botdeckindex].style.display = "none";
-    botdeckindex--;
-    entry = 0;
-    exit = 1;
+    if (hash[botdeckindex] == 0) {
+
+      if(botdeckindex<0)
+      return;
+      pushElemet = deck[botdeckindex];
+      spliceelement.push(botdeckindex);
+      hash[botdeckindex] = 1;
+      //console.log(spliceelement);
+      let y = document.getElementById("bottShelf").querySelectorAll("img");
+      y[botdeckindex].style.display = "none";
+      botdeckindex--;
+      entry = 0;
+      exit = 1;
     }
 
-    else
-    {
+    else {
       botdeckindex--;
       bclk();
     }

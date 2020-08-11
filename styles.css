@@ -5,6 +5,15 @@
     box-sizing: border-box;
 }
 
+.hovershow{
+    display: none;
+    padding-left: 5vw;
+    position: absolute;
+    left: 15vw;
+    z-index: 13;
+    opacity: 50%;
+}
+
 img{
     width: 15vw;
     height: 20vw;
@@ -14,16 +23,36 @@ img{
     display: flex;
     justify-content: space-around;
     padding-bottom: 1vh;
+    top: 5vh;
+    left: 5vw;
+}
+
+.hiddenBank{
+    min-width: 15vw;
+    min-height: 20vw;
+    border-radius: 10px;
+    background-image: linear-gradient(black, gray);
 }
 
 .sortedBank{
     display: flex;
 }
 
+.sortedBank:hover .hovershow{
+    display: inline;
+}
+
 .midShelf{
     display: flex;
     justify-content: space-around;
     padding-bottom: 10vh;
+}
+
+.midShelf div{
+    min-width: 15vw;
+    min-height: 5vw;
+    border-radius: 10px;
+    background-image: linear-gradient(black, gray);
 }
 
 .midShelf div div{
