@@ -48,8 +48,13 @@ img{
     padding-bottom: 10vh;
 }
 
+.midShelf img{
+    width: 25vw;
+    height: 30vw;
+}
+
 .midShelf div{
-    min-width: 15vw;
+    min-width: 25vw;
     min-height: 5vw;
     border-radius: 10px;
     background-image: linear-gradient(black, gray);
@@ -60,8 +65,8 @@ img{
 }
 
 .midShelf .active{
-    width: 15vw;
-    height: 20vw;
+    width: 25vw;
+    height: 30vw;
     border-radius: 10px;
     box-shadow: 0px 0px 5px black;
 }
@@ -70,6 +75,15 @@ img{
     display: flex;
     justify-content: space-evenly;
     padding-top: 5vh;
+}
+
+.openSet img{
+    width: 25vw;
+    height: 30vw;
+}
+
+.bottShelf{
+    padding-right: 20vw;
 }
 
 .bottShelf div{
@@ -85,7 +99,6 @@ img{
 }
 
 .bottShelf .active{
-    width: 15vw;
     border-radius: 10px;
     box-shadow: 0px 0px 5px black;
 }

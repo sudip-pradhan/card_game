@@ -33,7 +33,7 @@ function displayTop() {
 function deckDisplay() {
   let x = document.getElementById("bottShelf").querySelectorAll("img");
 
-  if (deckCursor > 33) {
+  if (deckCursor >= deck.length) {
     for (let i = 0; i < 34; i++) {
       x[i].style.display = "none";
     }
@@ -48,7 +48,7 @@ function deckDisplay() {
     return;
   }
 
-  for (let i = deckCursor; i < deckCursor + 3 && i < 34; i++) {
+  for (let i = deckCursor; i < deckCursor + 3 && i < deck.length; i++) {
     if (i < deck.length) {
       x[i].src = "./img/" + deck[i] + ".png";
       x[i].style.display = "";
